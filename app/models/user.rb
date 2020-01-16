@@ -1,3 +1,3 @@
-class User < ActiveRecord::base
+class User < ActiveRecord::Base
     has_many :ads
 end
