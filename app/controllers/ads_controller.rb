@@ -2,7 +2,15 @@ class AdsController < ApplicationController
     #CREATE
         #New
         #Make a get request to '/ads/new'
+    get '/ads/new' do 
+        erb :'/ads/new'
+    end 
 
+    #CREATE
+        #New
+        #Make a get request to '/ads/new'
+
+        post
     #READ
         #Index
         #Make a get request to '/ads'
