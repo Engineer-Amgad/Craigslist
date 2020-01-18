@@ -7,16 +7,17 @@ class AdsController < ApplicationController
         #Index
         #Make a get request to '/ads'
 
-        get '/ads' do 
-            @ads = Ad.all
-            erb :'ads/index'
-        end 
+    get '/ads' do 
+        @ads = Ad.all
+        erb :'ads/index'
+    end 
     #Show
     # Make a get request to '/ads/:id'
     
     get '/ads/:id' do 
-        @ad = Ad.find(params{"id"})
+        @ad = Ad.find(params["id"])
         erb :'ads/show'
+    end
     #UPDATE
         #Edit
         #Make a get requrest to /'ads/:id/edit'
