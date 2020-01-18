@@ -12,10 +12,11 @@ class AdsController < ApplicationController
 
         post '/ads' do 
             ad = Ad.new(params)
-            if ad.save
+            if !ad.title.empty? && !ad.description.empty? && !ad.contact.empty?
+                ad.save
                 redirect '/ads'  
             else 
-                @error = "Data is invalid. Please try again."
+                @error = "Data is invalid. Please fill in required fields."
                 erb :'/ads/new'
             end 
         end 
@@ -38,6 +39,32 @@ class AdsController < ApplicationController
     #UPDATE
         #Edit
         #Make a get requrest to /'ads/:id/edit'
+
+    get '/ads/:id/edit' do 
+        @ad = Ad.find(params["id"])
+        erb :'/ads/edit'
+    end 
+       
+        #Update
+        #make a patch request to '/ads/:id'
+
+    patch '/ads/:id' do
+        if !params["title"].empty? && !params["description"].empty? && !params["contact"].empty?
+            ad = Ad.find(params["id"])
+            ad.title = params["title"]
+            ad.description = params["description"]
+            ad.image = params["image"]
+            ad.price = params["price"]
+            ad.contact = params["contact"]
+
+            ad.save
+
+            redirect '/ads/:id'  
+        else 
+            @error = "Data is invalid. Please fill in required fields."
+            erb :'/ads/edit'
+        end 
+    end 
 
     #DESTROY
         #Make a delete rquest to '/ads/:id'

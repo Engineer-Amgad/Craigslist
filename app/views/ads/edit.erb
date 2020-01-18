@@ -1,0 +1,16 @@
+<h1> Edit ad for <%= @ad.title %></h1>
+<p><%= @error %> </p>
+<form action="/ads/<%= @ad.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label>Title</label>
+    <input type="text" name="title" value="<%= @ad.title %>"></br>
+    <label>Description</label>
+    <textarea name="description" value="<%= @ad.description %>"></textarea></br>
+    <label>Price</label>
+    <input type="text" name="price" value="<%= @ad.price %>"></br>
+    <label>Image URL Link</label>
+    <input type="text" name="image" value="<%= @ad.image %>"></br>
+    <label>Contact email</label>
+    <input type="text" name="contact" value="<%= @ad.contact %>"></br>
+    <button type="submit"> Edit Ad </button></form></br>
+</form>
