@@ -10,7 +10,15 @@ class AdsController < ApplicationController
         #New
         #Make a get request to '/ads/new'
 
-        post
+        post '/ads' do 
+            ad = Ad.new(params)
+            if ad.save
+                redirect '/ads'  
+            else 
+                @error = "Data is invalid. Please try again."
+                erb :'/ads/new'
+            end 
+        end 
     #READ
         #Index
         #Make a get request to '/ads'
@@ -19,6 +27,7 @@ class AdsController < ApplicationController
         @ads = Ad.all
         erb :'ads/index'
     end 
+
     #Show
     # Make a get request to '/ads/:id'
     
