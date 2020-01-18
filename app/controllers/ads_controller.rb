@@ -24,7 +24,7 @@ class AdsController < ApplicationController
         #Make a get request to '/ads'
 
     get '/ads' do 
-        @ads = Ad.all
+        @ads = Ad.all.reverse
         erb :'ads/index'
     end 
 
