@@ -4,7 +4,7 @@
 <h1><%= @ad.price %></h1>
 <h1><%= @ad.contact %></h1>
 
-<% if Helpers.is_logged_in?(session) %>
+<% if session[:user_id] == @ad.user_id%>
     <a href="/ads/<%= @ad.id %>/edit"> Edit ad</a>
     <form action="/ads/<%= @ad.id %>" method="post">
         <input type="hidden" name="_method" value="delete">

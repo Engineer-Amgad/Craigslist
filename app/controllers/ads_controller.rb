@@ -57,6 +57,7 @@ class AdsController < ApplicationController
             ad.image = params["image"]
             ad.price = params["price"]
             ad.contact = params["contact"]
+            ad.user_id = session[:user_id]
 
             ad.save
 

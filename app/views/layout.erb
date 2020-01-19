@@ -18,6 +18,7 @@
       <dive><a href="/"> Home</a></dive>
       <dive><a href="/ads"> Ads</a></dive>
       <% if Helpers.is_logged_in?(session) %>
+        <dive><a href="/ads/new">Create an Ad</a></dive>
         <dive><a href="/logout">Log Out</a></dive>
       <% else %>
         <dive><a href="/login">Log IN</a></dive>
