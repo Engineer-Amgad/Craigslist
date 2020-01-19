@@ -49,6 +49,7 @@ class AdsController < ApplicationController
         #make a patch request to '/ads/:id'
 
     patch '/ads/:id' do
+        @ad = Ad.find(params[:id])
         if !params["title"].empty? && !params["description"].empty? && !params["contact"].empty?
             ad = Ad.find(params["id"])
             ad.title = params["title"]
@@ -59,7 +60,7 @@ class AdsController < ApplicationController
 
             ad.save
 
-            redirect '/ads/:id'  
+            redirect "/ads/#{params[:id]}"
         else 
             @error = "Data is invalid. Please fill in required fields."
             erb :'/ads/edit'
