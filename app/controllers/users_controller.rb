@@ -8,15 +8,15 @@ class UsersController < ApplicationController
 
     post '/signup' do 
         user = User.new(params)
-        if user.username.empty? || user.password.empty?
+        if user.name.empty? || user.password.empty?
             @error = "Username and password can not be blank."
             erb :'user/signup'
-        elsif User.find_by(username: user.username)
+        elsif User.find_by(name: user.name)
             @error ="An account with this username already exists."
-            erb :'user/signup'
+            erb :'users/signup'
         else
             user.save
-            session[user_id] = user.id
+            session[:user_id] = user.id
             redirect '/ads'
         end
     end 
