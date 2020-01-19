@@ -3,4 +3,9 @@
 <h1><%= @ad.description %></h1>
 <h1><%= @ad.price %></h1>
 <h1><%= @ad.contact %></h1>
-<a href="/ads/<%= @ad.id %>/edit"> Edit </a>
+<a href="/ads/<%= @ad.id %>/edit"> Edit ad</a>
+
+<form action="/ads/<%= @ad.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit">Delete ad</button>
+</form>

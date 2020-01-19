@@ -69,5 +69,9 @@ class AdsController < ApplicationController
 
     #DESTROY
         #Make a delete rquest to '/ads/:id'
-
+    delete '/ads/:id' do 
+        ad = Ad.find(params[:id])
+        ad.destroy
+        redirect '/ads'
+    end 
 end 
