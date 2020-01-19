@@ -17,7 +17,11 @@
     <div>
       <dive><a href="/"> Home</a></dive>
       <dive><a href="/ads"> Ads</a></dive>
-      <dive><a href="/logout">Log Out</a></dive>
+      <% if Helpers.is_logged_in?(session) %>
+        <dive><a href="/logout">Log Out</a></dive>
+      <% else %>
+        <dive><a href="/login">Log IN</a></dive>
+      <% end %>
     </div>
     
     <div class="wrapper">
