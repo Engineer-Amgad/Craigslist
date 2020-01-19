@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
     get '/login' do
         erb :'users/login'
     end 
-    #users can log out
 
     post '/login' do
         if params[:name].empty? || params[:password].empty?
@@ -19,6 +18,12 @@ class SessionsController < ApplicationController
                 erb :"users/login"
             end 
         end 
+    end 
+
+    #users can log out
+    get '/logout' do 
+        session.clear
+        redirect '/'
     end 
     
 end 
