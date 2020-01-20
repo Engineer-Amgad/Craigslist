@@ -48,8 +48,12 @@ class AdsController < ApplicationController
         #Make a get requrest to /'ads/:id/edit'
 
     get '/ads/:id/edit' do 
-        @ad = Ad.find(params["id"])
-        erb :'/ads/edit'
+        if User.find_by(session[:user_id])
+            @ad = Ad.find(params["id"])
+            erb :'/ads/edit'
+        else 
+            redirect '/login'
+        end
     end 
        
         #Update

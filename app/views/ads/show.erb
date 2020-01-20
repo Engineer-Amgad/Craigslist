@@ -1,9 +1,8 @@
 <h1><%= @ad.title %></h1>
-<img src="<%= @ad.image %>" alt="ad_image">
-<h1><%= @ad.description %></h1>
-<h1><%= @ad.price %></h1>
-<h1><%= @ad.contact %></h1>
-<h1><%= @ad.user_id %></h1>
+<img src="<%= @ad.image %>" alt="Image" height="400" width="600">
+<h3><%= @ad.description %></h3>
+<h3><%= @ad.price %></h3>
+<h3><%= @ad.contact %></h3>
 
 <% if @ad.user && session[:user_id] == @ad.user.id%>
     <a href="/ads/<%= @ad.id %>/edit"> Edit ad</a>

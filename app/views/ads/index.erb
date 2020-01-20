@@ -1,8 +1,6 @@
 <h1>Ads</h1>
 <% @ads.each do |ad| %>
     <h2><a href="/ads/<%= ad.id %>"</a> <%= ad.title %> </h2>
-    <img src="<%= ad.image %>" alt="Image" height="400" width="600">
-    <p> <%= ad.description %> </p>
     <p> <%= ad.price %> </p>
-    <p> <%= ad.contact %> </p>
+    <img src="<%= ad.image %>" alt="Image" height="200" width="400">
 <% end %>
