@@ -3,7 +3,11 @@ class AdsController < ApplicationController
         #New
         #Make a get request to '/ads/new'
     get '/ads/new' do 
-        erb :'/ads/new'
+        if Helpers.is_logged_in?(session)
+            erb :'/ads/new'
+        else
+            redirect '/login'
+        end 
     end 
 
     #CREATE

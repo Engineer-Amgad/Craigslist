@@ -1,5 +1,4 @@
 <h1>Ads</h1>
-<a href="/ads/new"> Create a new ad </a>
 <% @ads.each do |ad| %>
     <h2><a href="/ads/<%= ad.id %>"</a> <%= ad.title %> </h2>
     <img src="<%= ad.image %>" alt="Image" height="400" width="600">
