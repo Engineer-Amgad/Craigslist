@@ -1,3 +1,4 @@
+require 'pry'
 class AdsController < ApplicationController
     #CREATE
         #New
@@ -17,6 +18,8 @@ class AdsController < ApplicationController
         post '/ads' do 
             ad = Ad.new(params)
             if !ad.title.empty? && !ad.description.empty? && !ad.contact.empty?
+                user = User.find(session[:user_id])
+                ad.user_id = user.id
                 ad.save
                 redirect '/ads'  
             else 
@@ -53,7 +56,7 @@ class AdsController < ApplicationController
         #make a patch request to '/ads/:id'
 
     patch '/ads/:id' do
-        @ad = Ad.find(params[:id])
+        ad = Ad.find(params[:id])
         if !params["title"].empty? && !params["description"].empty? && !params["contact"].empty?
             ad = Ad.find(params["id"])
             ad.title = params["title"]
@@ -61,8 +64,7 @@ class AdsController < ApplicationController
             ad.image = params["image"]
             ad.price = params["price"]
             ad.contact = params["contact"]
-            ad.user_id = session[:user_id]
-
+       
             ad.save
 
             redirect "/ads/#{params[:id]}"

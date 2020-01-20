@@ -3,11 +3,13 @@
 <h1><%= @ad.description %></h1>
 <h1><%= @ad.price %></h1>
 <h1><%= @ad.contact %></h1>
+<h1><%= @ad.user_id %></h1>
 
-<% if session[:user_id] == @ad.user_id%>
+<% if @ad.user && session[:user_id] == @ad.user.id%>
     <a href="/ads/<%= @ad.id %>/edit"> Edit ad</a>
     <form action="/ads/<%= @ad.id %>" method="post">
         <input type="hidden" name="_method" value="delete">
         <button type="submit">Delete ad</button>
     </form>
+
 <% end %>
