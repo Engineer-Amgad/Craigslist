@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
             @error = "Username or password is blank."
             erb :'users/login'
         else
-            if user = User.find_by(name: params[:name], password: params[:password])
+            if user = User.find_by(name: params[:name], password_digest: params[:password])
                 session[:user_id] = user.id 
                 redirect '/ads'
             else
