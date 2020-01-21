@@ -48,7 +48,7 @@ class AdsController < ApplicationController
         #Make a get requrest to /'ads/:id/edit'
 
     get '/ads/:id/edit' do 
-        if User.find_by(session[:user_id])
+        if User.find_by(id: session[:user_id])
             @ad = Ad.find(params["id"])
             erb :'/ads/edit'
         else 
