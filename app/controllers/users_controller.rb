@@ -7,8 +7,8 @@ class UsersController < ApplicationController
     end 
 
     post '/signup' do 
-        user = User.new(params)
-        if user.name.empty? || user.password.empty?
+        user = User.new(name: params[:name], password_digest: params[:password])
+        if user.name.empty? || user.password_digest.empty?
             @error = "Username and password can not be blank."
             erb :'user/signup'
         elsif User.find_by(name: user.name)
@@ -20,6 +20,5 @@ class UsersController < ApplicationController
             redirect '/ads'
         end
     end 
-    #user can delete account
 
 end 
