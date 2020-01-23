@@ -7,14 +7,15 @@ class UsersController < ApplicationController
     end 
 
     post '/signup' do 
-        user = User.new(name: params[:name], password_digest: params[:password])
-        if user.name.empty? || user.password_digest.empty?
+        # binding.pry
+        if params[:name].empty? || params[:password].empty?
             @error = "Username and password can not be blank."
-            erb :'user/signup'
-        elsif User.find_by(name: user.name)
+            erb :'users/signup'
+        elsif User.find_by(name: params[:name])
             @error ="An account with this username already exists."
             erb :'users/signup'
         else
+            user = User.new(name: params[:name], password: params[:password])
             user.save
             session[:user_id] = user.id
             redirect '/ads'
