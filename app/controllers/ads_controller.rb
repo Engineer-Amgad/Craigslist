@@ -19,8 +19,7 @@ class AdsController < ApplicationController
             ad = Ad.new(params)
             if !ad.title.empty? && !ad.description.empty? && !ad.contact.empty?
                 user = User.find(session[:user_id])
-                ad.user_id = user.id
-                ad.save
+                user.ads.create(params)
                 redirect '/ads'  
             else 
                 @error = "Data is invalid. Please fill in required fields."
@@ -48,10 +47,9 @@ class AdsController < ApplicationController
         #Make a get requrest to /'ads/:id/edit'
 
     get '/ads/:id/edit' do 
-        if !Helpers.is_ad_creater?(params["id"], session[:user_id])
-            redirect '/login'
-        end
-        
+                
+        redirect '/login' if !Helpers.is_ad_creater?(params["id"], session[:user_id])
+
         @ad = Ad.find(params["id"])
         erb :'/ads/edit'
     end 
@@ -60,27 +58,20 @@ class AdsController < ApplicationController
         #make a patch request to '/ads/:id'
 
     patch '/ads/:id' do
+        redirect '/ads' if params["title"].empty? || params["description"].empty? || params["contact"].empty?
+        redirect '/login' if !Helpers.is_ad_creater?(params["id"], session[:user_id])
+        
         ad = Ad.find(params[:id])
-        if !params["title"].empty? && !params["description"].empty? && !params["contact"].empty?
-            ad = Ad.find(params["id"])
-            ad.title = params["title"]
-            ad.description = params["description"]
-            ad.image = params["image"]
-            ad.price = params["price"]
-            ad.contact = params["contact"]
-       
-            ad.save
-
-            redirect "/ads/#{params[:id]}"
-        else 
-            @error = "Data is invalid. Please fill in required fields."
-            erb :'/ads/edit'
-        end 
+        ad.update(title: params["title"], description: params["description"], image: params["image"], price: params["price"], contact: params["contact"])
+        redirect "/ads/#{params[:id]}"
+    
     end 
 
     #DESTROY
         #Make a delete rquest to '/ads/:id'
     delete '/ads/:id' do 
+        redirect '/login' if !Helpers.is_ad_creater?(params["id"], session[:user_id])
+
         ad = Ad.find(params[:id])
         ad.destroy
         redirect '/ads'
